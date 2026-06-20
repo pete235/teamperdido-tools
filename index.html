@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)file:///Users/peterking/Downloads/index_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seller's Net Sheet Calculator | Team Perdido</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  #netSheetCalculator {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 28px 32px;
+    box-sizing: border-box;
+  }
+  input[type="number"], input[type="date"] {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  input[type="range"] {
+    flex: 1;
+  }
+  label {
+    font-size: 13px;
+    color: #555555;
+    display: block;
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+
+<div id="netSheetCalculator">
+
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+    <span style="font-size:20px;">🧮</span>
+    <span style="font-family:Georgia, &#39;Times New Roman&#39;, serif; font-size:19px; font-weight:bold; color:#00706D;">Seller's net sheet — Escambia / Santa Rosa County</span>
+  </div>
+  <p style="font-size:13px; color:#555555; margin:0 0 22px 0;">Precise estimate based on Florida closing costs and county tax rates.</p>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; margin-bottom:20px;">
+
+    <div>
+      <label for="ns-price">Purchase price</label>
+      <div style="position:relative;">
+        <span style="position:absolute; left:10px; top:50%; transform:translateY(-50%); font-size:14px; color:#888888;">$</span>
+        <input type="number" id="ns-price" value="800000" step="5000" style="padding-left:24px;">
+      </div>
+    </div>
+
+    <div>
+      <label for="ns-commission">Commission rate</label>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <input type="range" id="ns-commission" min="3" max="7" step="0.5" value="6">
+        <span id="ns-commission-out" style="font-size:14px; font-weight:bold; min-width:40px; color:#00706D;">6.0%</span>
+      </div>
+    </div>
+
+    <div>
+      <label for="ns-taxrate">Annual property tax rate</label>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <input type="range" id="ns-taxrate" min="0.8" max="1.8" step="0.05" value="1.3">
+        <span id="ns-taxrate-out" style="font-size:14px; font-weight:bold; min-width:44px; color:#00706D;">1.30%</span>
+      </div>
+    </div>
+
+    <div>
+      <label for="ns-dateacquired">Date acquired (purchase)</label>
+      <input type="date" id="ns-dateacquired" value="2018-01-01">
+    </div>
+
+    <div>
+      <label for="ns-closingdate">Expected closing date</label>
+      <input type="date" id="ns-closingdate" value="2026-09-01">
+    </div>
+
+    <div>
+      <label for="ns-hoa">Monthly HOA fee</label>
+      <div style="position:relative;">
+        <span style="position:absolute; left:10px; top:50%; transform:translateY(-50%); font-size:14px; color:#888888;">$</span>
+        <input type="number" id="ns-hoa" value="1000" step="50" style="padding-left:24px;">
+      </div>
+    </div>
+
+    <div>
+      <label for="ns-otherfees">Other fees (recording, FedEx, etc.)</label>
+      <div style="position:relative;">
+        <span style="position:absolute; left:10px; top:50%; transform:translateY(-50%); font-size:14px; color:#888888;">$</span>
+        <input type="number" id="ns-otherfees" value="100" step="25" style="padding-left:24px;">
+      </div>
+    </div>
+
+    <div>
+      <label for="ns-payoff">Remaining mortgage payoff</label>
+      <div style="position:relative;">
+        <span style="position:absolute; left:10px; top:50%; transform:translateY(-50%); font-size:14px; color:#888888;">$</span>
+        <input type="number" id="ns-payoff" value="0" step="5000" style="padding-left:24px;">
+      </div>
+    </div>
+
+  </div>
+
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px; padding:12px 16px; background:#f4f7f6; border-radius:6px;">
+    <input type="checkbox" id="ns-titlepolicy" style="width:16px; height:16px; flex-shrink:0;">
+    <label for="ns-titlepolicy" style="margin:0; cursor:pointer; color:#333333;">Seller pays owner's title insurance policy (0.5% of price + $160 search/closing fee)</label>
+  </div>
+
+  <div style="background:#f4f7f6; border-radius:8px; padding:16px 20px; margin-bottom:20px;">
+    <table style="width:100%; font-size:13px; border-collapse:collapse;">
+      <tbody><tr>
+        <td style="padding:5px 0; color:#555555;">Purchase price</td>
+        <td style="padding:5px 0; text-align:right; color:#222222;" id="ns-row-price">$800,000</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 0; color:#555555;">Commission</td>
+        <td style="padding:5px 0; text-align:right; color:#a32d2d;" id="ns-row-commission">−$48,000</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 0; color:#555555;">FL deed / doc stamps (0.7%)</td>
+        <td style="padding:5px 0; text-align:right; color:#a32d2d;" id="ns-row-docstamps">−$5,600</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 0; color:#555555;">Prorated property tax (<span id="ns-days-owned-out">243/365</span>)</td>
+        <td style="padding:5px 0; text-align:right; color:#a32d2d;" id="ns-row-tax">−$6,924</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 0; color:#555555;">Prorated HOA (<span id="ns-days-month-out">31/30</span>)</td>
+        <td style="padding:5px 0; text-align:right; color:#a32d2d;" id="ns-row-hoa">−$1,033</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 0; color:#555555;">Other fees</td>
+        <td style="padding:5px 0; text-align:right; color:#a32d2d;" id="ns-row-otherfees">−$100</td>
+      </tr>
+      <tr id="ns-row-title-wrap" style="display:none;">
+        <td style="padding:5px 0; color:#555555;">Owner's title policy</td>
+        <td style="padding:5px 0; text-align:right; color:#a32d2d;" id="ns-row-title">−$0</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 0; color:#555555;">Mortgage payoff</td>
+        <td style="padding:5px 0; text-align:right; color:#a32d2d;" id="ns-row-payoff">−$0</td>
+      </tr>
+    </tbody></table>
+  </div>
+
+  <div style="display:flex; align-items:baseline; justify-content:space-between; padding:0 4px 4px 4px; border-top:2px solid #2bbaa3; padding-top:14px;">
+    <span style="font-size:14px; color:#555555;">Estimated net proceeds</span>
+    <span id="ns-net-result" style="font-size:30px; font-weight:bold; color:#00706D;">$738,343</span>
+  </div>
+
+  <p style="font-size:11px; color:#999999; margin-top:18px; line-height:1.5;">
+    Property tax proration is calculated from January 1 of the closing year (or your purchase date, if later) through the closing date, divided by 365, applied to the estimated annual tax. This is an estimate for planning purposes only — Pete King can prepare an exact net sheet using your actual tax bill and mortgage payoff letter.
+  </p>
+
+  <div style="margin-top:18px; text-align:center;">
+    <a href="https://seelink.bio/pete@perdidopete.com" target="_top" style="display:inline-block; width:100%; box-sizing:border-box; padding:13px 0; background:#2bbaa3; color:#ffffff; font-size:14px; font-weight:bold; text-decoration:none; border-radius:24px;">
+      Ask Pete for my exact net sheet &nbsp;→
+    </a>
+  </div>
+</div>
+
+<script>
+function nsDaysBetween(d1, d2) {
+  var a = new Date(d1);
+  var b = new Date(d2);
+  return Math.max(0, Math.round((b - a) / 86400000));
+}
+
+function fmt(n) {
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+function fmtNeg(n) {
+  return '\u2212$' + Math.round(Math.abs(n)).toLocaleString('en-US');
+}
+
+function nsUpdate() {
+  var price = parseFloat(document.getElementById('ns-price').value) || 0;
+  var commissionPct = parseFloat(document.getElementById('ns-commission').value);
+  var taxRatePct = parseFloat(document.getElementById('ns-taxrate').value);
+  var hoa = parseFloat(document.getElementById('ns-hoa').value) || 0;
+  var otherFees = parseFloat(document.getElementById('ns-otherfees').value) || 0;
+  var payoff = parseFloat(document.getElementById('ns-payoff').value) || 0;
+  var titleChecked = document.getElementById('ns-titlepolicy').checked;
+
+  var dateAcquired = document.getElementById('ns-dateacquired').value;
+  var closingDate = document.getElementById('ns-closingdate').value;
+
+  document.getElementById('ns-commission-out').textContent = commissionPct.toFixed(1) + '%';
+  document.getElementById('ns-taxrate-out').textContent = taxRatePct.toFixed(2) + '%';
+
+  var commission = price * (commissionPct / 100);
+  var docStamps = price * 0.007;
+
+  var annualTax = price * (taxRatePct / 100);
+  var daysOwnedThisYear = 0;
+  if (dateAcquired && closingDate) {
+    var closing = new Date(closingDate);
+    var yearStart = new Date(closing.getFullYear() + '-01-01');
+    var acquired = new Date(dateAcquired);
+    var startOfProration = acquired > yearStart ? acquired : yearStart;
+    daysOwnedThisYear = nsDaysBetween(startOfProration, closing);
+  }
+  var proratedTax = (daysOwnedThisYear / 365) * annualTax;
+
+  var closingDay = closingDate ? new Date(closingDate).getDate() : 1;
+  var daysInMonthOwed = closingDay;
+  var proratedHoa = (daysInMonthOwed / 30) * hoa;
+
+  var titleCost = 0;
+  if (titleChecked) {
+    titleCost = (price * 0.005) + 160;
+  }
+
+  var net = price - commission - docStamps - proratedTax - proratedHoa - otherFees - titleCost - payoff;
+
+  document.getElementById('ns-row-price').textContent = fmt(price);
+  document.getElementById('ns-row-commission').textContent = fmtNeg(commission);
+  document.getElementById('ns-row-docstamps').textContent = fmtNeg(docStamps);
+  document.getElementById('ns-row-tax').textContent = fmtNeg(proratedTax);
+  document.getElementById('ns-days-owned-out').textContent = daysOwnedThisYear.toLocaleString('en-US') + '/365';
+  document.getElementById('ns-row-hoa').textContent = fmtNeg(proratedHoa);
+  document.getElementById('ns-days-month-out').textContent = daysInMonthOwed + '/30';
+  document.getElementById('ns-row-otherfees').textContent = fmtNeg(otherFees);
+  document.getElementById('ns-row-payoff').textContent = fmtNeg(payoff);
+
+  document.getElementById('ns-row-title-wrap').style.display = titleChecked ? '' : 'none';
+  document.getElementById('ns-row-title').textContent = fmtNeg(titleCost);
+
+  document.getElementById('ns-net-result').textContent = fmt(net);
+
+  // Resize parent iframe if embedded
+  if (window.parent && window.parent !== window) {
+    try {
+      var height = document.getElementById('netSheetCalculator').offsetHeight;
+      window.parent.postMessage({ type: 'netSheetResize', height: height }, '*');
+    } catch (e) {}
+  }
+}
+
+['ns-price','ns-commission','ns-taxrate','ns-dateacquired','ns-closingdate','ns-hoa','ns-otherfees','ns-payoff','ns-titlepolicy'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', nsUpdate);
+  document.getElementById(id).addEventListener('change', nsUpdate);
+});
+
+nsUpdate();
+</script>
+
+
+
+</body></html>
